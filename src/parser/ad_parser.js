@@ -1,6 +1,5 @@
 import { Ad } from '../ad';
 import { AdExtension } from '../ad_extension';
-import { AdExtensionChild } from '../ad_extension_child';
 import { parseCreativeCompanion } from './creative_companion_parser';
 import { parseCreativeLinear } from './creative_linear_parser';
 import { parseCreativeNonLinear } from './creative_non_linear_parser';
@@ -238,12 +237,13 @@ function parseWrapper(wrapperElement) {
 function parseExtensions(collection, extensions) {
   extensions.forEach(extNode => {
     const ext = new AdExtension();
-    const extNodeAttrs = extNode.attributes;
-    const childNodes = extNode.childNodes;
+
+    ext.name = extNode.nodeName;
+    ext.txt = parserUtils.parseNodeText(extNode);
 
     if (extNode.attributes) {
-      for (const extNodeAttrKey in extNodeAttrs) {
-        const extNodeAttr = extNodeAttrs[extNodeAttrKey];
+      for (const extNodeAttrKey in extNode.attributes) {
+        const extNodeAttr = extNode.attributes[extNodeAttrKey];
 
         if (extNodeAttr.nodeName && extNodeAttr.nodeValue) {
           ext.attributes[extNodeAttr.nodeName] = extNodeAttr.nodeValue;
@@ -251,29 +251,21 @@ function parseExtensions(collection, extensions) {
       }
     }
 
-    for (const childNodeKey in childNodes) {
-      const childNode = childNodes[childNodeKey];
+    const childNodes = [];
+
+    for (const childNodeKey in extNode.childNodes) {
+      const childNode = extNode.childNodes[childNodeKey];
+
       const txt = parserUtils.parseNodeText(childNode);
 
       // ignore comments / empty value
       if (childNode.nodeName !== '#comment' && txt !== '') {
-        const extChild = new AdExtensionChild();
-        extChild.name = childNode.nodeName;
-        extChild.value = txt;
-
-        if (childNode.attributes) {
-          const childNodeAttributes = childNode.attributes;
-
-          for (const extChildNodeAttrKey in childNodeAttributes) {
-            const extChildNodeAttr = childNodeAttributes[extChildNodeAttrKey];
-
-            extChild.attributes[extChildNodeAttr.nodeName] =
-              extChildNodeAttr.nodeValue;
-          }
-        }
-
-        ext.children.push(extChild);
+        childNodes.push(childNode);
       }
+    }
+
+    if (childNodes.length) {
+      parseExtensions(ext.children, childNodes);
     }
 
     collection.push(ext);
