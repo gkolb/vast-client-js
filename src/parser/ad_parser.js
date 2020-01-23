@@ -241,9 +241,11 @@ function parseExtensions(collection, extensions) {
     ext.name = extNode.nodeName;
     ext.txt = parserUtils.parseNodeText(extNode);
 
-    if (extNode.attributes) {
-      for (const extNodeAttrKey in extNode.attributes) {
-        const extNodeAttr = extNode.attributes[extNodeAttrKey];
+    const extNodeAttrs = extNode.attributes;
+
+    if (extNodeAttrs) {
+      for (const extNodeAttrKey in extNodeAttrs) {
+        const extNodeAttr = extNodeAttrs[extNodeAttrKey];
 
         if (extNodeAttr.nodeName && extNodeAttr.nodeValue) {
           ext.attributes[extNodeAttr.nodeName] = extNodeAttr.nodeValue;
