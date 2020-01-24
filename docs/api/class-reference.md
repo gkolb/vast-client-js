@@ -128,5 +128,5 @@ This class represents a generic Creative. It's used as a parent class for more s
 
 - `name: String|null`
 - `attributes: Object`
-- `txt: String|null`
+- `value: String|null`
 - `children: Array<AdExtension>`
