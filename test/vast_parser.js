@@ -245,14 +245,14 @@ describe('VASTParser', function() {
         ad1.extensions[0].attributes['type'].should.eql('WrapperExtension');
         ad1.extensions[0].children.should.have.length(1);
         ad1.extensions[0].children[0].name.should.eql('extension_tag');
-        ad1.extensions[0].children[0].txt.should.eql('extension_value');
+        ad1.extensions[0].children[0].value.should.eql('extension_value');
       });
 
       it('validate second extension', () => {
         ad1.extensions[1].attributes['type'].should.eql('Pricing');
         ad1.extensions[1].children.should.have.length(1);
         ad1.extensions[1].children[0].name.should.eql('Price');
-        ad1.extensions[1].children[0].txt.should.eql('0');
+        ad1.extensions[1].children[0].value.should.eql('0');
         ad1.extensions[1].children[0].attributes['model'].should.eql('CPM');
         ad1.extensions[1].children[0].attributes['currency'].should.eql('USD');
         ad1.extensions[1].children[0].attributes['source'].should.eql(
@@ -269,7 +269,7 @@ describe('VASTParser', function() {
         ad1.extensions[3].attributes.should.eql({});
         ad1.extensions[3].children.should.have.length(1);
         ad1.extensions[3].children[0].name.should.eql('#text');
-        ad1.extensions[3].children[0].txt.should.eql('{ foo: bar }');
+        ad1.extensions[3].children[0].value.should.eql('{ foo: bar }');
       });
 
       it('should not have trackingEvents property', () => {
@@ -771,7 +771,7 @@ describe('VASTParser', function() {
         ad2.extensions[0].attributes['type'].should.eql('WrapperExtension');
         ad2.extensions[0].children.should.have.length(1);
         ad2.extensions[0].children[0].name.should.eql('extension_tag');
-        ad2.extensions[0].children[0].txt.should.eql('extension_value');
+        ad2.extensions[0].children[0].value.should.eql('extension_value');
       });
 
       //Linear

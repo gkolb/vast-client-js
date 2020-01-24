@@ -239,7 +239,7 @@ function parseExtensions(collection, extensions) {
     const ext = new AdExtension();
 
     ext.name = extNode.nodeName;
-    ext.txt = parserUtils.parseNodeText(extNode);
+    ext.value = parserUtils.parseNodeText(extNode);
 
     const extNodeAttrs = extNode.attributes;
 
@@ -258,14 +258,14 @@ function parseExtensions(collection, extensions) {
     for (const childNodeKey in extNode.childNodes) {
       const childNode = extNode.childNodes[childNodeKey];
 
-      const txt = parserUtils.parseNodeText(childNode);
+      const value = parserUtils.parseNodeText(childNode);
 
       // ignore comments / empty value
       if (
         childNode &&
         childNode.nodeName !== '#cdata-section' &&
         childNode.nodeName !== '#comment' &&
-        txt !== ''
+        value !== ''
       ) {
         childNodes.push(childNode);
       }

@@ -1,7 +1,7 @@
 export class AdExtension {
   constructor() {
     this.name = null;
-    this.txt = null;
+    this.value = null;
     this.attributes = {};
     this.children = [];
   }
