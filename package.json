@@ -4,7 +4,7 @@
   "contributors": [
     "Elia Maino <eliamaino@gmail.com>"
   ],
-  "version": "2.5.1",
+  "version": "2.5.1-re.1",
   "description": "JavaScript VAST Client",
   "keywords": [
     "vast",
@@ -56,6 +56,7 @@
     "sinon": "^2.3.6"
   },
   "dependencies": {
-    "xmldom": "^0.1.27"
+    "xmldom": "^0.1.27",
+    "@types/vast-client": "2.1.3"
   }
 }
