@@ -261,7 +261,12 @@ function parseExtensions(collection, extensions) {
       const txt = parserUtils.parseNodeText(childNode);
 
       // ignore comments / empty value
-      if (childNode.nodeName !== '#comment' && txt !== '') {
+      if (
+        childNode &&
+        childNode.nodeName !== '#cdata-section' &&
+        childNode.nodeName !== '#comment' &&
+        txt !== ''
+      ) {
         childNodes.push(childNode);
       }
     }
